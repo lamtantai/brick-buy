@@ -8,8 +8,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        card: "var(--bg-card)",
+        secondary: "var(--clr-secondary)",
+      },
+
+      spacing: {
+        xs: "var(--space-xs)",
+        sm: "var(--space-sm)",
+        base: "var(--space-base)",
       },
     },
   },

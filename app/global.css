@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --header-height: 4rem;
+
+    --space-xs: 0.25rem;
+    --space-sm: 1.25rem;
+    --space-base: 1.75rem;
+
+    --bg-card: #f7f7f7;
+    --clr-secondary: #f1f1f1;
+  }
+}
+
+@layer components {
+  .hover-underline {
+    @apply absolute -bottom-1 left-0 h-1 w-full origin-left scale-x-0 rounded-full bg-black transition-transform duration-300 group-hover:scale-x-100;
+  }
+
+  .link-overlay {
+    @apply absolute left-0 top-0 h-full w-full;
+  }
+}
+
+body {
+  box-sizing: border-box;
+}
+
+.clip-path-button {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+  color: white;
+  font-weight: 600;
+  background-color: #ef4444;
+  line-height: normal;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.clip-path-button:hover {
+  background-color: #dc2626;
+}
