@@ -5,15 +5,22 @@ import { PiLegoLight } from "react-icons/pi";
 import { PiHash } from "react-icons/pi";
 
 import VideoPlayer from "./video-player";
+import AddToCartButton from "@/app/ui/add-to-cart-button";
 
-export default function ProductDescription({ product, theme }) {
+export default function ProductDescription({ product }) {
   return (
     <section>
       <div className="">
         <div className="p-sm font-bold lg:p-base">
           <h1 className="mb-6 text-4xl uppercase">{product.name}</h1>
-          <span className="text-xl opacity-70">{product.price}</span>
+          <span className="text-xl font-semibold opacity-70">
+            ${product.price}
+          </span>
           <p className="text-green-500">Available now</p>
+
+          <div className="mt-base">
+            <AddToCartButton product={product} text="Add to cart" />
+          </div>
         </div>
 
         <div className="my-8 grid grid-cols-3 divide-x-2 divide-black font-bold opacity-60">

@@ -32,7 +32,7 @@ export default function VideoPlayer({ src }) {
       ></video>
 
       <button
-        className="clip-path-button absolute right-sm top-sm p-2 text-3xl mix-blend-difference"
+        className="btn-custom-shape absolute right-sm top-sm p-2 text-3xl mix-blend-difference"
         onClick={playPause}
       >
         {isPlaying ? <CiPause1 /> : <IoPlayOutline />}

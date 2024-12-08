@@ -3,10 +3,9 @@ import localFont from "next/font/local";
 import "./global.css";
 
 import Header from "./components/header";
-import Menu from "./components/menu";
 
 import StoreProvider from "./store-provider";
-import CartCheckoutMenu from "./components/cart/cart-checkout-menu";
+import MenuContainer from "./components/menu/menu-container";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -20,7 +19,7 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "BRICK BUY | BUY THE LEGO YOU WANT",
+  title: "BRICK BUY",
   description: "",
 };
 
@@ -31,8 +30,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <StoreProvider>
-          <CartCheckoutMenu />
-          <Menu />
+          <MenuContainer />
           <Header />
           <main className="">{children}</main>
         </StoreProvider>

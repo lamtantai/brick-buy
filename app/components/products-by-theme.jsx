@@ -1,7 +1,8 @@
 import React from "react";
 
-import ProductCard, { ViewMoreCard } from "./product-card";
-import ProductsWrapper from "./products-wrapper";
+import ProductItem from "./product-item";
+import ProductList from "./product-list";
+import ViewMoreCard from "./view-more-card";
 
 export default function ProductsByTheme({ theme }) {
   return (
@@ -10,17 +11,17 @@ export default function ProductsByTheme({ theme }) {
         {theme.themeName}
       </h2>
 
-      <ProductsWrapper>
+      <ProductList>
         {theme.products.slice(0, 3).map((product) => (
           <div key={product.id}>
-            <ProductCard product={product} />
+            <ProductItem product={product} />
           </div>
         ))}
 
         <div>
           <ViewMoreCard theme={theme} />
         </div>
-      </ProductsWrapper>
+      </ProductList>
     </div>
   );
 }

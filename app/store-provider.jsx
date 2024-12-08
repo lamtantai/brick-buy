@@ -7,8 +7,8 @@ import { Provider } from "react-redux";
 import { makeStore } from "./lib/store";
 
 export default function StoreProvider({ children }) {
-  console.log("store provider");
   const storeRef = useRef();
+
   if (!storeRef.current) {
     storeRef.current = makeStore();
   }

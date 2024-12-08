@@ -38,7 +38,7 @@ export default function ImageGallery({ product, theme }) {
           </AnimatePresence>
         </div>
 
-        <ul className="flex gap-xs p-xs lg:order-first lg:flex-col lg:py-0 xl:gap-sm xl:px-sm">
+        <ul className="flex gap-xs p-xs lg:order-first lg:flex-col lg:gap-sm lg:px-sm lg:py-0">
           {product.images.map((image, index) => {
             return (
               <li
@@ -56,7 +56,7 @@ export default function ImageGallery({ product, theme }) {
                   alt=""
                   sizes="(min-width: 1024px) 12.5vw, 25vw"
                   fill
-                  className="object-contain"
+                  className="scale-90 object-contain"
                 />
               </li>
             );

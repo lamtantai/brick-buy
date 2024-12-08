@@ -1,7 +1,7 @@
 import React from "react";
 
-import AllProductsWrapper from "./all-products-wrapper";
+import AllProductsPage from "./all-products-page";
 
 export default function All() {
-  return <AllProductsWrapper />;
+  return <AllProductsPage />;
 }

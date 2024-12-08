@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { legoThemes } from "@/app/lib/data";
 import React from "react";
 import ImageGallery from "./image-gallery";
@@ -10,9 +11,14 @@ export default async function ProductDetail({ params }) {
   const currentTheme = legoThemes.find((theme) =>
     theme.products.some((product) => product.id === param),
   );
+
   const currentProduct = currentTheme?.products.find(
     (product) => product.id === param,
   );
+
+  if (!currentTheme || !currentProduct) {
+    notFound();
+  }
 
   return (
     <>

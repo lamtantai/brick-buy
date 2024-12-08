@@ -7,8 +7,12 @@
     --header-height: 4rem;
 
     --space-xs: 0.25rem;
+
     --space-sm: 1.25rem;
+
     --space-base: 1.75rem;
+
+    --space-50: 0.5rem;
 
     --bg-card: #f7f7f7;
     --clr-secondary: #f1f1f1;
@@ -21,15 +25,26 @@
   }
 
   .link-overlay {
-    @apply absolute left-0 top-0 h-full w-full;
+    @apply absolute inset-0;
   }
+
+  .btn-size-md {
+    @apply w-full max-w-96 py-3;
+  }
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
 }
 
 body {
   box-sizing: border-box;
 }
 
-.clip-path-button {
+.btn-custom-shape {
   clip-path: polygon(
     0 0,
     calc(100% - 10px) 0,
@@ -38,6 +53,7 @@ body {
     10px 100%,
     0 calc(100% - 10px)
   );
+
   color: white;
   font-weight: 600;
   background-color: #ef4444;
@@ -46,6 +62,6 @@ body {
   transition: color 0.3s;
 }
 
-.clip-path-button:hover {
+.btn-custom-shape:hover {
   background-color: #dc2626;
 }
