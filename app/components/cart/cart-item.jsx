@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  decreaseProductQuantity,
-  increaseProductQuantity,
-  removeProductFromCart,
-} from "@/app/lib/features/cart-slice";
+import { addToCart, decrementQuantity } from "@/app/lib/features/cart-slice";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -38,25 +34,18 @@ export default function CartItem({ product }) {
           {product.name}
         </Link>
 
-        <div className="flex justify-between">
-          <span className="text-lg font-semibold opacity-70">
-            {product.price}
+        <div className="flex items-center justify-between">
+          <span className="text-lg/none font-semibold opacity-70">
+            ${product.price}
           </span>
 
           <div className="flex items-center gap-x-sm">
-            <button
-              className="text-lg text-red-500 transition-colors duration-300 hover:text-red-400"
-              onClick={() => dispatch(removeProductFromCart(product.id))}
-            >
-              <FiTrash2 />
-            </button>
-
             <div className="flex items-center bg-card">
               <button
                 className="p-2 transition-colors duration-300 hover:bg-gray-300"
-                onClick={() => dispatch(decreaseProductQuantity(product.id))}
+                onClick={() => dispatch(decrementQuantity(product.id))}
               >
-                <FiMinus />
+                {product.quantity === 1 ? <FiTrash2 /> : <FiMinus />}
               </button>
 
               <span className="pointer-events-none px-2">
@@ -69,7 +58,17 @@ export default function CartItem({ product }) {
                     ? "cursor-not-allowed bg-gray-200"
                     : "hover:bg-gray-300"
                 }`}
-                onClick={() => dispatch(increaseProductQuantity(product.id))}
+                onClick={() =>
+                  dispatch(
+                    addToCart({
+                      id: product.id,
+                      name: product.name,
+                      image: product.image,
+                      price: product.price,
+                      href: product.href,
+                    }),
+                  )
+                }
                 disabled={product.quantity >= 5}
               >
                 <FiPlus />

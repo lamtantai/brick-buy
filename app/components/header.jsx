@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -18,13 +18,36 @@ import logo from "../icon.png";
 
 import DropdownThemes from "./dropdown-themes";
 import { usePathname } from "next/navigation";
+import { fetchCartData, sendCartData } from "../lib/features/cart-actions";
+import ProgressBar from "../ui/progress-bar";
 
 export default function Header() {
   const dispatch = useDispatch();
 
   const pathname = usePathname();
 
-  console.log(pathname);
+  const cart = useSelector((state) => state.cart);
+
+  const isInitialRender = useRef(true);
+  const prevTotalQuantity = useRef(cart.totalQuantity);
+
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      return;
+    }
+
+    console.log(cart.latestAddedItem);
+
+    if (cart.changed && prevTotalQuantity.current !== cart.totalQuantity) {
+      prevTotalQuantity.current = cart.totalQuantity;
+      dispatch(sendCartData(cart));
+    }
+  }, [cart, dispatch]);
 
   return (
     <>
@@ -41,7 +64,7 @@ export default function Header() {
               />
             </Link>
 
-            {pathname === "/checkout" ? (
+            {pathname.startsWith("/checkout") ? (
               ""
             ) : (
               <div className="hidden h-full items-center gap-x-10 text-xl font-semibold uppercase lg:flex">
@@ -57,7 +80,7 @@ export default function Header() {
             )}
           </div>
 
-          {pathname === "/checkout" ? (
+          {pathname.startsWith("/checkout") ? (
             ""
           ) : (
             <div className="flex h-full items-center gap-x-5 text-2xl">
@@ -69,11 +92,11 @@ export default function Header() {
               </button>
 
               <button
-                className="relative h-full"
+                className="h-full"
                 onClick={() => dispatch(openMenu("cart"))}
               >
-                <CartLogo />
-                <div className="absolute -right-1/2 top-[20%] flex size-5 items-center justify-center rounded-full bg-red-600">
+                <div className="relative">
+                  <CartLogo />
                   <TotalQuantitySpan />
                 </div>
               </button>
@@ -90,12 +113,21 @@ export default function Header() {
           )}
         </div>
       </header>
+      <ProgressBar />
     </>
   );
 }
 
 function TotalQuantitySpan() {
-  const { totalQuantity } = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
 
-  return <span className="p-1 text-sm">{totalQuantity}</span>;
+  return (
+    <div className="absolute -right-3 -top-3 rounded-full bg-red-500">
+      <div className="flex min-h-5 min-w-5 items-center justify-center px-1">
+        <span className="text-sm/none font-semibold text-white">
+          {cart.totalQuantity}
+        </span>
+      </div>
+    </div>
+  );
 }

@@ -43,7 +43,7 @@ export default function ImageGallery({ product, theme }) {
             return (
               <li
                 key={image}
-                className={`relative aspect-[4/3] flex-1 cursor-pointer overflow-hidden bg-card transition-all duration-300 hover:brightness-75 ${currentIndex === index ? "pointer-events-none brightness-95" : "pointer-events-auto brightness-50"}`}
+                className={`relative aspect-[4/3] flex-1 cursor-pointer overflow-hidden bg-card transition-all duration-300 ${currentIndex === index ? "pointer-events-none brightness-95" : "pointer-events-auto brightness-50"}`}
                 onClick={() => setCurrentIndex(index)}
               >
                 <BackgroundImage

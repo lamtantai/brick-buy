@@ -15,7 +15,10 @@
     --space-50: 0.5rem;
 
     --bg-card: #f7f7f7;
+
     --clr-secondary: #f1f1f1;
+
+    --clr-tertiary: #707070;
   }
 }
 
@@ -42,6 +45,21 @@
 
 body {
   box-sizing: border-box;
+}
+
+input::-webkit-input-placeholder {
+  color: var(--clr-tertiary);
+  text-transform: none;
+}
+
+input:-ms-input-placeholder {
+  color: var(--clr-tertiary);
+  text-transform: none;
+}
+
+input::placeholder {
+  color: var(--clr-tertiary);
+  text-transform: none;
 }
 
 .btn-custom-shape {

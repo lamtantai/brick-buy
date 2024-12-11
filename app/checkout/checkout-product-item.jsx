@@ -4,34 +4,33 @@ import React from "react";
 
 export default function CheckoutProductItem({ product }) {
   return (
-    <div className="grid w-full grid-cols-[6.5rem_1fr] gap-x-sm py-base text-lg/none">
+    <div className="flex items-center gap-x-sm">
       <Link
         href={product.href}
-        className="flex aspect-square items-center justify-center bg-card"
+        className="relative flex size-16 flex-shrink-0 items-center justify-center rounded-md border border-[#646363] bg-[#3a3939]"
       >
         <Image
           src={product.image}
           alt="product image"
-          width={100}
-          height={100}
+          width={64}
+          height={64}
           className="h-full w-full scale-90 object-contain"
         />
+
+        <div className="absolute -right-2 -top-2 rounded-full bg-card opacity-60">
+          <div className="flex min-h-5 min-w-5 items-center justify-center px-1">
+            <span className="text-sm/none font-semibold text-black">
+              {product.quantity}
+            </span>
+          </div>
+        </div>
       </Link>
 
-      <div className="flex flex-col justify-between">
-        <Link
-          href={product.href}
-          className="text-lg leading-none hover:underline"
-        >
-          {product.name}
-        </Link>
+      <Link href={product.href} className="flex-1 hover:underline">
+        {product.name}
+      </Link>
 
-        <span className="pb-sm text-base">Qty: {product.quantity}</span>
-
-        <span className="text-red-700">
-          ${product.price * product.quantity}
-        </span>
-      </div>
+      <span>${product.price * product.quantity}</span>
     </div>
   );
 }

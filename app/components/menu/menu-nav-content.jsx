@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import React from "react";
 
-import AccordionItem from "../accordion-item";
+import AccordionItem from "@/app/ui/accordion/accordion-item";
 
 import { legoThemes } from "@/app/lib/data";
 
@@ -19,15 +19,17 @@ export default function MenuNavContent() {
           shop all
         </Link>
 
-        <AccordionItem name="themes">
-          <ul className="pt-sm">
-            {legoThemes.map((theme) => (
-              <li key={theme.themeName}>
-                <Link href={theme.href}>{theme.themeName}</Link>
-              </li>
-            ))}
-          </ul>
-        </AccordionItem>
+        <div className="">
+          <AccordionItem label="theme">
+            <ul className="pt-sm text-xl">
+              {legoThemes.map((theme) => (
+                <li key={theme.themeName}>
+                  <Link href={theme.href}>{theme.themeName}</Link>
+                </li>
+              ))}
+            </ul>
+          </AccordionItem>
+        </div>
       </nav>
 
       <Image

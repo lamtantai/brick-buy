@@ -5,13 +5,15 @@ import CartSummary from "../cart/cart-summary";
 
 import { legoThemes } from "@/app/lib/data";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import SliderContainer from "../slider-container";
 import SmallProductItem from "../small-product-item";
 import Link from "next/link";
 
 export default function MenuCartContent() {
+  const randomNumber = Math.floor(Math.random() * 1000000);
+
   const { totalQuantity, cartItems } = useSelector((state) => state.cart);
 
   return (
@@ -50,7 +52,7 @@ export default function MenuCartContent() {
       {totalQuantity > 0 && (
         <div className="sticky bottom-0 left-0 z-50 flex w-full justify-center border-t border-black bg-white py-sm">
           <Link
-            href="/checkout"
+            href={`/checkout`}
             className="btn-custom-shape btn-size-md text-center"
           >
             check out

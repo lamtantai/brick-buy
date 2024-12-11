@@ -28,7 +28,7 @@ export const filterProducts = (legoThemes, filters) => {
       }),
     );
 
-  const sortProducts = (products) => {
+  const sortedProducts = (products) => {
     if (!sortBy) return products;
 
     return products.sort((a, b) => {
@@ -40,5 +40,5 @@ export const filterProducts = (legoThemes, filters) => {
     });
   };
 
-  return sortProducts(filteredProducts);
+  return sortedProducts(filteredProducts);
 };

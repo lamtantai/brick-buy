@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         card: "var(--bg-card)",
         secondary: "var(--clr-secondary)",
+        tertiary: "var(--clr-tertiary)",
       },
 
       spacing: {

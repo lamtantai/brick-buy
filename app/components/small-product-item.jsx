@@ -11,8 +11,8 @@ export default function SmallProductItem({ product }) {
         <Image
           src={product.images[0]}
           alt="product image"
-          width={100}
-          height={100}
+          width={56}
+          height={56}
           className="h-full w-full object-contain"
         />
       </div>

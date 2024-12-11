@@ -70,7 +70,7 @@ const filterSlice = createSlice({
       );
     },
 
-    clearFilter(state) {
+    clearAllFilters(state) {
       state.priceRange = [];
       state.theme = [];
       state.ageRange = [];
@@ -86,7 +86,7 @@ export const {
   setTheme,
   setAgeRange,
   setPieceRange,
-  clearFilter,
+  clearAllFilters,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

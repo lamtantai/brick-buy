@@ -16,7 +16,7 @@ import MenuSearchContainer from "./menu-search-container";
 import { usePathname } from "next/navigation";
 
 import { closeMenu } from "@/app/lib/features/menu-slice";
-import { clearFilter } from "@/app/lib/features/filter-slice";
+import { clearAllFilters } from "@/app/lib/features/filter-slice";
 
 export default function MenuContainer() {
   const { type: menuType, isOpen: isMenuOpen } = useSelector(
@@ -28,7 +28,7 @@ export default function MenuContainer() {
   const pathname = usePathname();
 
   useEffect(() => {
-    dispatch(clearFilter());
+    dispatch(clearAllFilters());
     dispatch(closeMenu());
   }, [dispatch, pathname]);
 
@@ -64,14 +64,14 @@ export default function MenuContainer() {
   return (
     <>
       <motion.div
-        className="fixed right-0 top-0 z-[500] w-full bg-white sm:max-w-[30rem]"
+        className="fixed right-0 top-0 z-[500] h-full w-full bg-white sm:max-w-[30rem]"
         initial={{ x: "100%" }}
         animate={{
           x: isMenuOpen ? 0 : "100%",
           transition: { duration: 0.3 },
         }}
       >
-        <div className="relative grid h-screen grid-cols-1 grid-rows-[auto_auto_1fr] overflow-y-auto px-sm lg:px-base">
+        <div className="relative grid h-full grid-cols-1 grid-rows-[auto_auto_1fr] overflow-y-auto px-sm lg:px-base">
           <div className="flex items-center justify-between pt-sm">
             <p className="text-2xl font-semibold uppercase">{menuType}</p>
             <button
