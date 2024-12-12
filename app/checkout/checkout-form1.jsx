@@ -12,11 +12,20 @@ const CheckoutForm1 = () => {
     phone: "",
   });
 
+  const [didEdit, setDidEdit] = useState({
+    name: false,
+    email: false,
+    address: false,
+    phone: false,
+  });
+
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
+    console.log("change");
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setDidEdit((prev) => ({ ...prev, [name]: true }));
   };
 
   const validate = () => {
@@ -33,6 +42,8 @@ const CheckoutForm1 = () => {
 
     return Object.keys(newErrors).length === 0;
   };
+
+  console.log("1");
 
   const handleSubmit = (e) => {
     e.preventDefault();

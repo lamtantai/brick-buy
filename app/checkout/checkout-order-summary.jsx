@@ -4,11 +4,9 @@ import React from "react";
 
 import CheckoutProductItem from "./checkout-product-item";
 
-import { useSelector } from "react-redux";
-
 import AccordionItem from "../ui/accordion/accordion-item";
 
-import CheckoutInputCode from "./checkout-input-code";
+import { currencyFormatter } from "../utils/currencyFormatter";
 
 export default function CheckoutOrderSummary({ cartData }) {
   const { cartItems, totalQuantity, totalPrice } = cartData;
@@ -28,14 +26,12 @@ export default function CheckoutOrderSummary({ cartData }) {
             ))}
           </ul>
 
-          <CheckoutInputCode />
-
           <div className="">
             <div className="flex justify-between">
               <p>
                 Subtotal - {totalQuantity} {totalQuantity ? "items" : "item"}{" "}
               </p>
-              <p>${totalPrice}</p>
+              <p>{currencyFormatter.format(totalPrice)}</p>
             </div>
 
             <div className="mt-8 flex justify-between text-lg font-semibold">
@@ -44,7 +40,7 @@ export default function CheckoutOrderSummary({ cartData }) {
                 <span className="pr-xs text-sm font-normal opacity-60">
                   USD
                 </span>
-                ${totalPrice}
+                {currencyFormatter.format(totalPrice)}
               </p>
             </div>
           </div>
@@ -64,21 +60,19 @@ export default function CheckoutOrderSummary({ cartData }) {
           ))}
         </ul>
 
-        <CheckoutInputCode />
-
         <div className="">
           <div className="flex justify-between">
             <p>
               Subtotal - {totalQuantity} {totalQuantity ? "items" : "item"}{" "}
             </p>
-            <p>${totalPrice}</p>
+            <p>{currencyFormatter.format(totalPrice)}</p>
           </div>
 
           <div className="mt-6 flex justify-between text-xl font-semibold">
             <p className="">Total</p>
             <p>
-              <span className="pr-xs text-sm font-normal opacity-60">USD</span>$
-              {totalPrice}
+              <span className="pr-xs text-sm font-normal opacity-60">USD</span>
+              {currencyFormatter.format(totalPrice)}
             </p>
           </div>
         </div>

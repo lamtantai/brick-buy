@@ -1,6 +1,7 @@
 "use client";
 
 import { addToCart, decrementQuantity } from "@/app/lib/features/cart-slice";
+import { currencyFormatter } from "@/app/utils/currencyFormatter";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -36,7 +37,7 @@ export default function CartItem({ product }) {
 
         <div className="flex items-center justify-between">
           <span className="text-lg/none font-semibold opacity-70">
-            ${product.price}
+            {currencyFormatter.format(product.price)}
           </span>
 
           <div className="flex items-center gap-x-sm">

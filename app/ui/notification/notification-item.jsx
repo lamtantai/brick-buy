@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { MdError } from "react-icons/md";
 import Image from "next/image";
+import { currencyFormatter } from "@/app/utils/currencyFormatter";
 
 export default function NotificationItem({ status, latestAddedItem }) {
   return (
@@ -42,7 +43,7 @@ function SuccessNotification({ latestAddedItem }) {
           {latestAddedItem.name}
         </p>
         <p className="text-ellipsis text-nowrap text-sm opacity-60">
-          ${latestAddedItem.price}
+          {currencyFormatter.format(product.price)}
         </p>
         <p className="text-sm uppercase text-red-500">added to cart</p>
       </div>

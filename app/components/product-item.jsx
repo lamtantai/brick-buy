@@ -7,6 +7,7 @@ import { PiHash, PiLegoLight } from "react-icons/pi";
 import { LuCake } from "react-icons/lu";
 
 import AddToCartButton from "../ui/add-to-cart-button";
+import { currencyFormatter } from "../utils/currencyFormatter";
 
 export default function ProductItem({ product }) {
   return (
@@ -33,7 +34,9 @@ export default function ProductItem({ product }) {
             <Link href={product.href} className="hover:underline">
               <h3 className="text-lg/none font-bold">{product.name}</h3>
             </Link>
-            <span className="opacity-70">${product.price}</span>
+            <span className="opacity-70">
+              {currencyFormatter.format(product.price)}
+            </span>
           </div>
 
           <AddToCartButton product={product} />

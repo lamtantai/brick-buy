@@ -17,6 +17,7 @@ import { usePathname } from "next/navigation";
 
 import { closeMenu } from "@/app/lib/features/menu-slice";
 import { clearAllFilters } from "@/app/lib/features/filter-slice";
+import BackgroundLayer from "@/app/ui/background-layer";
 
 export default function MenuContainer() {
   const { type: menuType, isOpen: isMenuOpen } = useSelector(
@@ -91,15 +92,9 @@ export default function MenuContainer() {
         </div>
       </motion.div>
 
-      <motion.div
-        className="fixed inset-0 z-[400] bg-black"
+      <BackgroundLayer
+        isOpen={isMenuOpen}
         onClick={() => dispatch(closeMenu())}
-        initial={{ opacity: 0, pointerEvents: "none" }}
-        animate={{
-          opacity: isMenuOpen ? 0.3 : 0,
-          pointerEvents: isMenuOpen ? "auto" : "none",
-        }}
-        transition={{ duration: 0.3 }}
       />
     </>
   );

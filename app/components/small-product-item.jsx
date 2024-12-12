@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 import { VscLinkExternal } from "react-icons/vsc";
+import { currencyFormatter } from "../utils/currencyFormatter";
 
 export default function SmallProductItem({ product }) {
   return (
@@ -21,7 +22,9 @@ export default function SmallProductItem({ product }) {
         <p className="overflow-hidden text-ellipsis text-nowrap">
           {product.name}
         </p>
-        <p className="text-base opacity-70">${product.price}</p>
+        <p className="text-base opacity-70">
+          {currencyFormatter.format(product.price)}
+        </p>
       </div>
 
       <Link

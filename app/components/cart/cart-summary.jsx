@@ -1,3 +1,4 @@
+import { currencyFormatter } from "@/app/utils/currencyFormatter";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -16,7 +17,7 @@ export default function CartSummary() {
           <span className="text-sm font-semibold opacity-70 lg:text-base">
             USD
           </span>{" "}
-          <b>({totalPrice.toFixed(2)})</b>
+          <b>({currencyFormatter.format(totalPrice)})</b>
         </p>
       </div>
 

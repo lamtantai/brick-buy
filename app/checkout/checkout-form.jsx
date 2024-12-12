@@ -2,42 +2,69 @@
 
 import React, { useState } from "react";
 
-import InputField from "./input-filed";
-import InputErrorMessage from "./input-error-message";
+import InputField from "./input-field";
+import { useDispatch } from "react-redux";
+import { clearCartItems } from "../lib/features/cart-slice";
+import { openModal } from "../lib/features/modal-slice";
+import Modal from "../ui/modal";
+
+const defaultFormData = {
+  firstName: "",
+  lastName: "",
+  address: "",
+  phone: "",
+  email: "",
+};
+
+const defaultDidEdit = Object.keys(defaultFormData).reduce((acc, key) => {
+  acc[key] = false;
+  return acc;
+}, {});
 
 export default function CheckoutForm() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    address: "",
-    phone: "",
-    email: "",
-  });
+  const [formData, setFormData] = useState(defaultFormData);
+  const [didEdit, setDidEdit] = useState(defaultFormData);
 
-  const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
 
-  function handleChange(e) {
+  function handleInputChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
-  function validate() {
-    const newErrors = {};
-
-    if (!formData.firstName.trim().length < 2) {
-      newErrors.firstName = "This field must have a length no shorter than 2.";
-    }
-
-    setErrors(newErrors);
+  function handleInputBlur(e) {
+    const { name } = e.target;
+    setDidEdit((prev) => ({ ...prev, [name]: true }));
   }
+
+  const isFirstNameInvalid =
+    didEdit.firstName && formData.firstName.trim().length < 2;
+
+  const isLastNameInvalid =
+    didEdit.lastName && formData.lastName.trim().length < 2;
+
+  const isPhoneInvalid = didEdit.phone && !formData.phone.trim();
+
+  const isAddressInvalid = didEdit.address && !formData.address.trim();
+
+  const isEmailInvalid =
+    didEdit.email &&
+    (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email));
+
+  const isFormInvalid =
+    isFirstNameInvalid ||
+    isLastNameInvalid ||
+    isPhoneInvalid ||
+    isAddressInvalid ||
+    isEmailInvalid;
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (validate()) {
-      console.log("Form submitted:", formData);
-      alert("Form submitted successfully!");
-      setFormData({ name: "", email: "", address: "", phone: "" });
-    }
+
+    if (isFormInvalid) return;
+
+    dispatch(clearCartItems());
+    dispatch(openModal());
   }
 
   return (
@@ -46,59 +73,66 @@ export default function CheckoutForm() {
         Shipping Details
       </h3>
       <form className="space-y-sm" onSubmit={handleSubmit}>
-        <div className="">
-          <InputField
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            placeholder="First name*"
-            onChange={handleChange}
-            isValid
-          />
-          <InputErrorMessage errorMessage={errors.firstName} />
-        </div>
+        <InputField
+          onBlur={handleInputBlur}
+          type="text"
+          name="firstName"
+          value={formData.firstName}
+          placeholder="First name*"
+          onChange={handleInputChange}
+          isInvalid={isFirstNameInvalid}
+          errorMessage="This field must have a length no shorter than 2."
+        />
 
         <InputField
+          onBlur={handleInputBlur}
           type="text"
           name="lastName"
           value={formData.lastName}
           placeholder="Last name*"
-          onChange={handleChange}
-          isValid
+          onChange={handleInputChange}
+          isInvalid={isLastNameInvalid}
+          errorMessage="This field must have a length no shorter than 2."
         />
 
         <InputField
+          onBlur={handleInputBlur}
           type="text"
           name="address"
           value={formData.address}
           placeholder="Address*"
-          onChange={handleChange}
-          isValid
+          onChange={handleInputChange}
+          isInvalid={isAddressInvalid}
+          errorMessage="Please enter shipping address."
         />
 
         <InputField
+          onBlur={handleInputBlur}
           type="tel"
-          pattern="[0-9]{10}"
           name="phone"
           value={formData.phone}
           placeholder="Phone*"
-          onChange={handleChange}
-          isValid
+          onChange={handleInputChange}
+          isInvalid={isPhoneInvalid}
+          errorMessage="Please enter your phone number."
         />
 
         <InputField
+          onBlur={handleInputBlur}
           type="email"
           name="email"
           value={formData.email}
           placeholder="Email*"
-          onChange={handleChange}
-          isValid
+          onChange={handleInputChange}
+          isInvalid={isEmailInvalid}
+          errorMessage="Please enter a valid email."
         />
 
         <div className="flex justify-center">
           <button
             type="submit"
-            className="btn-custom-shape btn-size-md !bg-green-600"
+            className={`btn-custom-shape btn-size-md !bg-green-600 ${isFormInvalid && "cursor-not-allowed"}`}
+            disabled={isFormInvalid}
           >
             Submit
           </button>

@@ -6,6 +6,7 @@ import { PiHash } from "react-icons/pi";
 
 import VideoPlayer from "./video-player";
 import AddToCartButton from "@/app/ui/add-to-cart-button";
+import { currencyFormatter } from "@/app/utils/currencyFormatter";
 
 export default function ProductDescription({ product }) {
   return (
@@ -14,7 +15,7 @@ export default function ProductDescription({ product }) {
         <div className="p-sm font-bold lg:p-base">
           <h1 className="mb-6 text-4xl uppercase">{product.name}</h1>
           <span className="text-xl font-semibold opacity-70">
-            ${product.price}
+            {currencyFormatter.format(product.price)}
           </span>
           <p className="text-green-500">Available now</p>
 

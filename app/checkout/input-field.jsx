@@ -1,31 +1,21 @@
 import React from "react";
 
 export default function InputField({
-  type,
-  name,
   value,
-  onChange,
   placeholder,
-  inputMode,
-  isValid,
-  pattern,
+  isInvalid,
+  errorMessage,
+  ...props
 }) {
   return (
-    <div className="relative flex-1">
+    <div className="relative">
       <input
         required
-        inputMode={inputMode}
-        id={name}
-        name={name}
-        type={type}
-        pattern={pattern}
         value={value}
-        onChange={onChange}
+        {...props}
         placeholder={placeholder}
         className={`w-full cursor-text overflow-hidden rounded-md border uppercase text-black outline-none transition-all duration-200 focus:ring-1 ${
-          !isValid
-            ? "border-red-500 focus:border-red-500"
-            : "border-gray-300 focus:border-sky-500"
+          isInvalid ? "border-red-500 focus:border-red-500" : ""
         } ${value ? "px-3 pb-1 pt-5" : "p-3"}`}
       />
 
@@ -34,6 +24,12 @@ export default function InputField({
       >
         {placeholder}
       </label>
+
+      {isInvalid && (
+        <div className="mt-3">
+          <p className="text-red-400">{errorMessage}</p>
+        </div>
+      )}
     </div>
   );
 }

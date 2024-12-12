@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { currencyFormatter } from "../utils/currencyFormatter";
 
 export default function CheckoutProductItem({ product }) {
   return (
@@ -30,7 +31,7 @@ export default function CheckoutProductItem({ product }) {
         {product.name}
       </Link>
 
-      <span>${product.price * product.quantity}</span>
+      <span>{currencyFormatter.format(product.price * product.quantity)}</span>
     </div>
   );
 }
