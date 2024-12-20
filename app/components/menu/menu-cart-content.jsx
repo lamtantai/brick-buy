@@ -12,8 +12,6 @@ import SmallProductItem from "../small-product-item";
 import Link from "next/link";
 
 export default function MenuCartContent() {
-  const randomNumber = Math.floor(Math.random() * 1000000);
-
   const { totalQuantity, cartItems } = useSelector((state) => state.cart);
 
   return (

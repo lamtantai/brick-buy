@@ -42,13 +42,13 @@ export default function SliderContainer({ products, children }) {
 
         <div className="flex gap-x-sm text-white md:gap-x-10">
           <button
-            className="flex items-center justify-center rounded-full bg-black p-xs"
+            className="flex items-center justify-center rounded-full bg-black p-xs hover:opacity-80"
             onClick={() => scrollLeft()}
           >
             <IoMdArrowDropleft />
           </button>
           <button
-            className="flex items-center justify-center rounded-full bg-black p-xs"
+            className="flex items-center justify-center rounded-full bg-black p-xs hover:opacity-80"
             onClick={() => scrollRight()}
           >
             <IoMdArrowDropright />
