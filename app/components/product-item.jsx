@@ -6,12 +6,12 @@ import React from "react";
 import { PiHash, PiLegoLight } from "react-icons/pi";
 import { LuCake } from "react-icons/lu";
 
-import AddToCartButton from "../ui/add-to-cart-button";
-import { currencyFormatter } from "../utils/currencyFormatter";
+import AddToCartButton from "./add-to-cart-button";
+import { currencyFormatter } from "../lib/utils/currencyFormatter";
 
 export default function ProductItem({ product }) {
   return (
-    <div className="group bg-card text-base font-semibold">
+    <div className="group border bg-card text-base font-semibold">
       <Link href={product.href} className="relative block aspect-[4/3]">
         <Image
           src={product.images[0]}

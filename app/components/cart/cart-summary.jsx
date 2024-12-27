@@ -1,5 +1,8 @@
-import { currencyFormatter } from "@/app/utils/currencyFormatter";
+"use client";
+
 import React from "react";
+
+import { currencyFormatter } from "@/app/lib/utils/currencyFormatter";
 import { useSelector } from "react-redux";
 
 export default function CartSummary() {

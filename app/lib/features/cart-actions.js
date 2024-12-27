@@ -1,5 +1,6 @@
-import fetchData from "@/app/utils/fetchData";
 import { replaceCart } from "./cart-slice";
+
+import fetchData from "@/app/lib/utils/fetchData";
 import { showNotification } from "./notification-slice";
 
 export function fetchCartData() {
@@ -24,6 +25,7 @@ export function fetchCartData() {
 export function sendCartData(cart) {
   return async (dispatch) => {
     dispatch(showNotification("pending"));
+
     async function sendCartData() {
       const response = await fetch(
         "https://brick-buys-default-rtdb.firebaseio.com/cart.json",

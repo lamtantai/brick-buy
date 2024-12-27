@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 import { VscLinkExternal } from "react-icons/vsc";
-import { currencyFormatter } from "../utils/currencyFormatter";
+import { currencyFormatter } from "../lib/utils/currencyFormatter";
 
 export default function SmallProductItem({ product }) {
   return (

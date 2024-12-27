@@ -1,60 +1,38 @@
-"use client";
+import React from "react";
 
-import React, { useEffect, useState } from "react";
-import CheckoutForm from "./checkout-form";
-import CheckoutOrderSummary from "./checkout-order-summary";
-import ErrorPage from "../ui/error-page";
-import fetchData from "../utils/fetchData";
+import Link from "next/link";
+import Image from "next/image";
+
+import CheckoutOrderSummary from "./components/checkout-order-summary";
+import CheckoutForm from "./components/checkout-form";
+
+import logo from "@/app/icon.png";
 
 export default function CheckoutPage() {
-  const [cartData, setCartData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  return (
+    <>
+      <header className="sticky top-0 z-50 w-full bg-secondary">
+        <div className="flex h-[--header-height] items-center px-3 lg:px-8">
+          <Link href="/" className="lg:size-14">
+            <Image
+              src={logo}
+              alt="Website logo"
+              width={45}
+              height={45}
+              className="h-full w-full"
+            />
+          </Link>
+        </div>
+      </header>
 
-  useEffect(() => {
-    async function loadCartData() {
-      setLoading(true);
-      try {
-        const data = await fetchData(
-          "https://brick-buys-default-rtdb.firebaseio.com/cart.json",
-        );
-        setCartData(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadCartData();
-  }, []);
-
-  function Loading() {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-black border-t-transparent"></div>
-      </div>
-    );
-  }
-
-  if (loading) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <ErrorPage errorMessage={error} />;
-  }
-
-  return !cartData.totalQuantity ? (
-    <ErrorPage errorMessage="Your cart is empty." />
-  ) : (
-    <section className="min-h-[calc(100vh-var(--header-height))] lg:grid lg:grid-cols-2">
-      <div className="bg-[#333232] lg:order-last lg:p-14">
-        <CheckoutOrderSummary cartData={cartData} />
-      </div>
-      <div className="flex justify-end p-sm lg:p-14">
-        <CheckoutForm />
-      </div>
-    </section>
+      <section className="min-h-[calc(100vh-var(--header-height))] lg:grid lg:grid-cols-2">
+        <div className="bg-[#333232] lg:order-last lg:p-14">
+          <CheckoutOrderSummary />
+        </div>
+        <div className="flex justify-end p-sm lg:p-14">
+          <CheckoutForm />
+        </div>
+      </section>
+    </>
   );
 }
