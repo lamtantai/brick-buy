@@ -17,7 +17,7 @@ export function fetchCartData() {
         }),
       );
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
     }
   };
 }
@@ -48,7 +48,7 @@ export function sendCartData(cart) {
       await sendCartData();
       dispatch(showNotification("success"));
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
       dispatch(showNotification("error"));
     }
   };

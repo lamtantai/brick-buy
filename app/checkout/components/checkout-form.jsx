@@ -65,7 +65,7 @@ export default function CheckoutForm() {
   }
 
   return (
-    <div className="w-full lg:max-w-[36rem]">
+    <div className="sticky top-[calc(var(--header-height)+3.5rem)] h-fit w-full lg:max-w-[36rem]">
       <ConfirmedModal isOpen={formSubmitSuccess} />
       <h3 className="mb-6 text-3xl font-semibold capitalize">
         Shipping Details

@@ -17,12 +17,12 @@ export default function Wrapper({ children }) {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isInitialRender.current) {
+    if (isInitialRender.current && !cart.changed) {
       isInitialRender.current = false;
       return;
     }
 
-    if (cart.changed && prevTotalQuantity.current !== cart.totalQuantity) {
+    if (cart.changed) {
       prevTotalQuantity.current = cart.totalQuantity;
       dispatch(sendCartData(cart));
     }

@@ -3,12 +3,13 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import CheckoutOrderSummary from "./components/checkout-order-summary";
 import CheckoutForm from "./components/checkout-form";
 
 import logo from "@/app/icon.png";
 
-export default function CheckoutPage() {
+import CheckoutOrderSummary from "./components/checkout-order-summary";
+
+export default async function CheckoutPage() {
   return (
     <>
       <header className="sticky top-0 z-50 w-full bg-secondary">
@@ -29,7 +30,7 @@ export default function CheckoutPage() {
         <div className="bg-[#333232] lg:order-last lg:p-14">
           <CheckoutOrderSummary />
         </div>
-        <div className="flex justify-end p-sm lg:p-14">
+        <div className="relative flex justify-end p-sm lg:p-14">
           <CheckoutForm />
         </div>
       </section>

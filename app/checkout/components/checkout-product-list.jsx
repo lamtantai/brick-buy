@@ -8,7 +8,7 @@ import { currencyFormatter } from "@/app/lib/utils/currencyFormatter";
 export default function CheckoutProductList({ products }) {
   return (
     <ul className="space-y-sm">
-      {products.map((item) => (
+      {products?.map((item) => (
         <li key={item.id}>
           <CheckoutProductItem product={item} />
         </li>

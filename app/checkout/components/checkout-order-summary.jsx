@@ -1,20 +1,37 @@
-import React, { Suspense } from "react";
+"use client";
 
-import fetchData from "@/app/lib/utils/fetchData";
+import React, { useEffect, useState } from "react";
 
 import { notFound } from "next/navigation";
 
 import AccordionItem from "@/app/components/accordion-item";
 import CheckoutProductList from "./checkout-product-list";
 import CheckoutTotalPrice from "./checkout-total-price";
+import fetchData from "@/app/lib/utils/fetchData";
 import LoadingSpinner from "@/app/components/loading-spinner";
 
-async function Carts() {
-  const { cartItems, totalQuantity, totalPrice } = await fetchData(
-    "https://brick-buys-default-rtdb.firebaseio.com/cart.json",
-  );
+export default function CheckoutOrderSummary() {
+  const [cart, setCart] = useState();
 
-  if (!totalQuantity) {
+  useEffect(() => {
+    async function fetchCart() {
+      const cartData = await fetchData(
+        "https://brick-buys-default-rtdb.firebaseio.com/cart.json",
+      );
+
+      setCart(cartData);
+    }
+
+    fetchCart();
+  }, []);
+
+  if (!cart) {
+    return <LoadingSpinner />;
+  }
+
+  const { cartItems, totalQuantity, totalPrice } = cart;
+
+  if (totalQuantity === 0) {
     notFound();
   }
 
@@ -38,22 +55,12 @@ async function Carts() {
         <h3 className="mb-6 text-3xl font-semibold capitalize">
           Order summary
         </h3>
-
         <CheckoutProductList products={cartItems} />
-
         <CheckoutTotalPrice
           totalPrice={totalPrice}
           totalQuantity={totalQuantity}
         />
       </div>
     </div>
-  );
-}
-
-export default function CheckoutOrderSummary() {
-  return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <Carts />
-    </Suspense>
   );
 }
